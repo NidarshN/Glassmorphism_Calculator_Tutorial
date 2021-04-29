@@ -66,7 +66,7 @@
                 >
                 <span
                     class="num equal"
-                    onclick="document.calc.txt.value = eval(calc.txt.value) == NaN ? 'Infinity' : eval(calc.txt.value)"
+                    onclick="document.calc.txt.value = evaluator(calc.txt.value)"
                     >=</span
                 >
             </form>
@@ -81,6 +81,18 @@
             });
 
             VanillaTilt.init(document.querySelectorAll(".container"));
+        </script>
+        <script type="text/javascript">
+            function evaluator(value) {
+                let evaluated_value = eval(value);
+                if (value === "0/0") {
+                    return "undefined";
+                } else if (value === "") {
+                    return "";
+                } else {
+                    return evaluated_value;
+                }
+            }
         </script>
     </body>
 </html>
