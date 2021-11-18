@@ -6,10 +6,16 @@
         <title>Glassmorphism Calculator</title>
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
-    <body>
+    <body onkeypress="keyInputs(event)">
         <div class="container">
             <form class="calculator" name="calc">
-                <input type="text" readonly class="value" name="txt" />
+                <input
+                    type="text"
+                    readonly
+                    class="value"
+                    id="txtField"
+                    name="txt"
+                />
                 <span class="num clear" onclick="calc.txt.value =''"
                     >clear</span
                 >
@@ -74,7 +80,7 @@
         <script type="text/javascript" src="/js/vanilla-tilt.js"></script>
         <script type="text/javascript">
             VanillaTilt.init(document.querySelector(".container"), {
-                max: 25,
+                max: 5,
                 speed: 400,
                 glare: true,
                 "max-glare": 0.2,
@@ -91,6 +97,27 @@
                     return "";
                 } else {
                     return evaluated_value;
+                }
+            }
+
+            function keyInputs(event) {
+                var x = event.key;
+                console.log(x);
+                if (/^\d+$/.test(x)) {
+                    document.getElementById("txtField").value += x;
+                } else if (x != "Enter") {
+                    switch (x) {
+                        case "+":
+                        case "-":
+                        case "*":
+                        case "/":
+                            document.getElementById("txtField").value += x;
+                            break;
+                    }
+                } else if (x == "Enter") {
+                    document.getElementById("txtField").value = evaluator(
+                        calc.txt.value
+                    );
                 }
             }
         </script>
