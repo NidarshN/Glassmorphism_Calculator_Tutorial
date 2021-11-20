@@ -106,9 +106,9 @@
                     document.getElementById("txtField").value += x;
                 } else if (x == "Backspace") {
                     var temp = document.getElementById("txtField").value;
-                    document.getElementById("txtField").value = temp.substring(
+                    document.getElementById("txtField").value = temp.slice(
                         0,
-                        temp.length - 1
+                        -1
                     );
                 } else if (x == "Enter") {
                     document.getElementById("txtField").value = evaluator(
