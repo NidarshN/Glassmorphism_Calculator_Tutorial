@@ -6,7 +6,7 @@
         <title>Glassmorphism Calculator</title>
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
-    <body onkeypress="keyInputs(event)">
+    <body onkeydown="keyInputs(event)">
         <div class="container">
             <form class="calculator" name="calc">
                 <input
@@ -102,10 +102,19 @@
 
             function keyInputs(event) {
                 var x = event.key;
-                console.log(x);
                 if (/^\d+$/.test(x)) {
                     document.getElementById("txtField").value += x;
-                } else if (x != "Enter") {
+                } else if (x == "Backspace") {
+                    var temp = document.getElementById("txtField").value;
+                    document.getElementById("txtField").value = temp.substring(
+                        0,
+                        temp.length - 1
+                    );
+                } else if (x == "Enter") {
+                    document.getElementById("txtField").value = evaluator(
+                        calc.txt.value
+                    );
+                } else {
                     switch (x) {
                         case "+":
                         case "-":
@@ -114,10 +123,6 @@
                             document.getElementById("txtField").value += x;
                             break;
                     }
-                } else if (x == "Enter") {
-                    document.getElementById("txtField").value = evaluator(
-                        calc.txt.value
-                    );
                 }
             }
         </script>
